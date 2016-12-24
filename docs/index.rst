@@ -34,7 +34,7 @@ The API Documentation / Guide
 .. toctree::
    :maxdepth: 2
 
-   trainer
+   trainer.trainer
 
 
 Indices and tables

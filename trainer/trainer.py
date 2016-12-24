@@ -2,7 +2,7 @@
 
 """
 trainer.trainer
-~~~~~~~~~~~~~~~
+===============
 
 Entry point for the trainer app
 

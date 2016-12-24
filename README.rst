@@ -29,9 +29,16 @@ TODO
 
 #. (DONE) Add documentation using Sphinx and upload to readthedocs.org
 #. (DONE) Use git for source control and upload to github
-#. Create setup.py and allow users to install trainer as a command line tool
+#. Enable support for bulk add and delete of programming exercises
+
+   #. Refactor the exercises out of the trainer class
+   #. Investigate using Python pickling to store exercises instead of txt
+   #. Provide out to text for visual inspection?
+   #. Add ids to exercises to enable easier adding/removing
+
 #. Enable support for generating lists with total estimate time it will take to complete
 #. Enable a spec to be added each programming exercises that provides exercise details
+#. Create setup.py and allow users to install trainer as a command line tool
 #. Enable support for multiple lists for better management.
 #. Enable support of python unittest to be use to validate programming exercises
 #. Enable support to log time it took for each programming exercises
