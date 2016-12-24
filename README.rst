@@ -27,8 +27,8 @@ TODO
    #. Add mock data that can used in the tests
    #. Implement functionality that enables the user stories
 
-#. Use git for source control and upload to github
 #. Add documentation using Sphinx and upload to readthedocs.org
+#. Use git for source control and upload to github
 #. Enable support for generating lists with total estimate time it will take to complete
 #. Enable a spec to be added each programming exercises that provides exercise details
 #. Enable support for multiple lists for better management.
