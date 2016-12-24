@@ -27,13 +27,14 @@ It is very simple to use::
     0. Calculate powers of two numbers using Python argparse.
     1. Build a skeleton python project and create git repo.
 
-==============
-The User Guide
-==============
+=============================
+The API Documentation / Guide
+=============================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+
+   trainer
 
 
 Indices and tables
