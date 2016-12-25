@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""A set of unit tests for the trainer module"""
-
 import sys
 import os
 sys.path.insert(0, os.path.abspath('..'))
@@ -9,7 +7,9 @@ sys.path.insert(0, os.path.abspath('.'))
 
 import unittest
 import shutil
+
 from trainer.trainer import Trainer
+from trainer.exercises import Exercises, Exercise
 
 TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.txt')
 
@@ -53,6 +53,9 @@ class TrainerTestCases1(unittest.TestCase):
         if os.path.isfile(self._TMP_DATA_FILE):
             os.remove(self._TMP_DATA_FILE)
 
+    def test_trainer_exercises_of_type_exercises(self):
+        self.assertIsInstance(self.trainer._exercises, Exercises)
+
     def test_get_all_exercises(self):
         tasks = self.trainer.get_all_exercises();
         self.assertEqual(len(tasks), 10)
@@ -79,14 +82,14 @@ class TrainerTestCases1(unittest.TestCase):
 
         # it is safe to assume that we have a unique set of
         # programming exercises
-        self.assertTrue(set(all_tasks) == set(new_all_tasks),
+        self.assertTrue(all_tasks == new_all_tasks,
                 "List of all tasks has been mutated!")
 
     def test_add_new_exercise(self):
         all_tasks = self.trainer.get_all_exercises()
         self.assertEqual(len(all_tasks), 10)
 
-        exercise = "new random exercise"
+        exercise = Exercise("new random exercise")
         self.trainer.add_exercise(exercise)
 
         new_all_tasks = self.trainer.get_all_exercises()
@@ -105,7 +108,7 @@ class TrainerTestCases1(unittest.TestCase):
         self.assertTrue(error_msg in context.exception)
 
     def test_add_new_exercise_persists_to_data_storage(self):
-        exercise = "new random exercise"
+        exercise = Exercise("new random exercise")
         self.trainer.add_exercise(exercise)
         old_all_tasks = self.trainer.get_all_exercises()
 
@@ -113,14 +116,15 @@ class TrainerTestCases1(unittest.TestCase):
         new_all_tasks = new_trainer.get_all_exercises()
 
         # NOTE(steve): may be slow when data set size increases
-        self.assertTrue(set(old_all_tasks) == set(new_all_tasks),
+        self.assertTrue(old_all_tasks == new_all_tasks,
                 "Changes aren't persisting to data storage")
 
     def test_get_all_exercises_returns_a_copy_only(self):
         all_tasks = self.trainer.get_all_exercises()
         self.assertEqual(len(all_tasks), 10)
 
-        all_tasks.append('exercise should not be included')
+        ex = Exercise('exercise should not be included')
+        all_tasks.append(ex)
         new_all_tasks = self.trainer.get_all_exercises()
         self.assertEqual(len(new_all_tasks), 10)
 
@@ -154,7 +158,7 @@ class TrainerTestCases1(unittest.TestCase):
         new_all_tasks = new_trainer.get_all_exercises()
 
         # NOTE(steve): may be slow when data set size increases
-        self.assertTrue(set(updated_all_tasks) == set(new_all_tasks),
+        self.assertTrue(updated_all_tasks == new_all_tasks,
                 "Changes aren't persisting to data storage")
 
 if __name__ == '__main__':

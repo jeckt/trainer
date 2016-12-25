@@ -13,6 +13,8 @@ Entry point for the trainer app
 import os
 import random
 
+from exercises import Exercises, Exercise
+
 # TODO(steve): should exercises be moved into its own
 # class? The orchestration layer should handle errors
 # and display it to the users as oppose to raising errors
@@ -28,7 +30,7 @@ class Trainer:
 
         Examples
         --------
-        >>> from trainer import Trainer
+        >>> from trainer.trainer import Trainer
         >>> trainer = Trainer()
 
         Parameters
@@ -48,7 +50,11 @@ class Trainer:
 
         try:
             with open(self._conn, 'rb') as f:
-                self._exercises = [x[:-len(os.linesep)] for x in f.readlines() if x != os.linesep]
+                self._exercises = Exercises()
+                for line in f.readlines():
+                    if line != os.linesep:
+                        ex = Exercise(line[:-len(os.linesep)])
+                        self._exercises.append(ex)
         except:
             self._is_data_loaded = False
             raise
@@ -57,7 +63,7 @@ class Trainer:
 
     def get_all_exercises(self):
         """Get all programming exercises in Trainer"""
-        return list(self._exercises)
+        return Exercises(self._exercises)
 
     def get_new_list(self, n):
         """Get number of random programming exercises"""
@@ -102,7 +108,8 @@ class Trainer:
     def _save_exercises(self):
         try:
             with open(self._conn, 'wb') as f:
-                [f.write(x + os.linesep) for x in self._exercises]
+                for ex in self.get_all_exercises():
+                    f.write(str(ex) + os.linesep)
         except:
             raise
 

@@ -9,7 +9,9 @@ sys.path.insert(0, os.path.abspath('.'))
 
 import unittest
 import shutil
+
 from trainer.trainer import Trainer
+from trainer.exercises import Exercise
 
 TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.txt')
 
@@ -61,14 +63,14 @@ class FunctionalTestCase1(unittest.TestCase):
         # user proceeds to add another exercise
         # that he thinks might help him learn
         # the python argparse library
-        exercise = "Use argparse to calculate the power of two numbers"
-        self.trainer.add_exercise(exercise)
+        ex = Exercise("Use argparse to calculate the power of two numbers")
+        self.trainer.add_exercise(ex)
 
         # user grabs the list of all exercises again
         # and checks that the exercise has been added
         new_all_tasks = self.trainer.get_all_exercises()
         self.assertEqual(len(new_all_tasks), 11)
-        self.assertIn(exercise, new_all_tasks)
+        self.assertIn(ex, new_all_tasks)
 
     def test_user_removes_exercise_from_trainer(self):
         """A daily user finds that an exercise he has
