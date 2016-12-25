@@ -31,12 +31,16 @@ TODO
 #. (DONE) Use git for source control and upload to github
 #. Enable support for bulk add and delete of programming exercises
 
-   #. Refactor the exercises out of the trainer class
+   #. (DONE) Refactor the exercises out of the trainer class
    #. Investigate using Python pickling to store exercises instead of txt
-   #. Provide out to text for visual inspection?
+   #. Provide output to text for visual inspection?
    #. Add ids to exercises to enable easier adding/removing
 
-#. Enable support for generating lists with total estimate time it will take to complete
+#. Enable support for generating lists with time to complete estimates
+
+   #. Consider what the default behaviour should be if users don't supply a 
+         time estimate. Should time estimates be optional?
+
 #. Enable a spec to be added each programming exercises that provides exercise details
 #. Create setup.py and allow users to install trainer as a command line tool
 #. Enable support for multiple lists for better management.
