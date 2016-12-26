@@ -12,6 +12,9 @@ and management of programming exercises
 # list, set of dict class? Initial thoughts no.
 # We want exercises to be SIMPLER than a list
 # object but has some similar attributes.
+# TODO(steve): should we switch from python
+# pickle to json pickle for cross platform
+# compatibility
 class Exercises(object):
     """Container for programming exercises"""
     def __init__(self, exercises=None):

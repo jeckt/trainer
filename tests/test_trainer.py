@@ -11,7 +11,9 @@ import shutil
 from trainer import Trainer
 from exercises import Exercises, Exercise
 
-TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.pkl')
+DATA_PATH = os.path.dirname(__file__)
+TEST_DATA_FILE = os.path.join(DATA_PATH, 'test_dataset_1.pkl')
+TEST_ADD_DATA = os.path.join(DATA_PATH, 'new_exercises.csv')
 
 class TrainerConnectionTestCases(unittest.TestCase):
     """A set of unit test for testing connection"""
@@ -52,6 +54,20 @@ class TrainerTestCases1(unittest.TestCase):
     def tearDown(self):
         if os.path.isfile(self._TMP_DATA_FILE):
             os.remove(self._TMP_DATA_FILE)
+
+    def test_trainer_bulk_add_exercises_from_csv(self):
+        tasks = self.trainer.get_all_exercises()
+        self.assertEqual(len(tasks), 10)
+
+        self.trainer.add_exercises_from_csv(TEST_DATA_FILE)
+        self.assertEqual(len(tasks), 13)
+
+    def test_trainer_bulk_add_exercises_from_csv_no_file(self):
+        with self.assertRaises(IOError) as context:
+            self.trainer.add_exercises_from_csv('fake.csv')
+
+        error_msg = "No such file or directory: '{}'".format('fake.csv')
+        self.assertTrue(error_msg in context.exception)
 
     def test_trainer_returns_exercises_of_type_exercise(self):
         tasks = self.trainer.get_all_exercises()

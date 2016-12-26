@@ -32,7 +32,8 @@ TODO
 #. Enable support for bulk add and delete of programming exercises
 
    #. (DONE) Refactor the exercises out of the trainer class
-   #. Investigate using Python pickling to store exercises instead of txt
+   #. (DONE) Investigate using Python pickling to store exercises instead of txt
+   #. Provide support for loading exercises via csv. For ease of updating
    #. Provide output to text for visual inspection?
    #. Add ids to exercises to enable easier adding/removing
 

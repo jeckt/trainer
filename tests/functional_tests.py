@@ -14,6 +14,7 @@ from trainer import Trainer
 from exercises import Exercise
 
 TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.pkl')
+TEST_ADD_DATA = os.path.join(os.path.dirname(__file__), 'new_exercises.csv')
 
 class FunctionalTestCase1(unittest.TestCase):
     """A set of functional test cases that highlight
@@ -34,6 +35,53 @@ class FunctionalTestCase1(unittest.TestCase):
     def tearDown(self):
         if os.path.isfile(self._TMP_DATA_FILE):
             os.remove(self._TMP_DATA_FILE)
+
+    def test_user_bulk_add_exercises(self):
+        """A user wants to load more than one programming
+        exercise to her list of programming exercises"""
+
+        # user starts up trainer and checks that
+        # there are 10 exercises available as she
+        # remembers it
+        all_tasks = self.trainer.get_all_exercises()
+        self.assertEqual(len(all_tasks), 10)
+
+        # To improve her programming skills, the user
+        # decides to add three more exercises to trainer.
+        # She writes these into a csv file named 
+        # 'new_exercises.csv'
+        self.trainer.add_exercises_from_csv(TEST_ADD_DATA)
+
+        # She then checks that her new exercises have
+        # been added to trainer
+        new_all_tasks = self.trainer.get_all_exercises()
+        self.assertEqual(len(new_all_tasks), 13)
+
+    def test_user_update_exercise(self):
+        """A user adds a new programming exercise a
+        accidentally adds it with a typo. She would
+        like to update it to get rid of the typo
+        """
+
+        # user adds another exercise to the trainer
+        ex = Exercise("Create dict of items. Onion it and load it back up")
+        self.trainer.add_exercise(ex)
+
+        # user checks that the exercise has been added
+        # discovers she typed onion instead of pickle!
+        all_tasks = self.trainer.get_all_exercises()
+        self.assertEqual(len(all_tasks), 11)
+
+        # user creates a new correct exercise and
+        # uses it to update the wrong one
+        new_ex = Exercise("Pickle a dictionary of items and load it up again")
+        self.trainer.update_exercise(ex, new_ex)
+
+        # user checks that the exercise has been 
+        # modified correctly
+        new_all_tasks = self.trainer.get_all_exercises()
+        self.assertTrue(new_ex in new_all_tasks)
+        self.assertFalse(ex in new_all_tasks)
 
     def test_user_creates_new_list(self):
         """A daily user would typically log into trainer

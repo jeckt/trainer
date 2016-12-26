@@ -23,7 +23,7 @@ Rp10
 (dp11
 S'_description'
 p12
-S'build console app to calculate powers using argparse\r'
+S'build console app to calculate powers using argparse'
 p13
 sbag0
 (g8
@@ -32,7 +32,7 @@ Ntp14
 Rp15
 (dp16
 g12
-S'write a script to load a txt file and print to console\r'
+S'write a script to load a txt file and print to console'
 p17
 sbag0
 (g8
@@ -41,7 +41,7 @@ Ntp18
 Rp19
 (dp20
 g12
-S'write a script that reraises an exception\r'
+S'write a script that reraises an exception'
 p21
 sbag0
 (g8
@@ -50,7 +50,7 @@ Ntp22
 Rp23
 (dp24
 g12
-S'create a git repo\r'
+S'create a git repo'
 p25
 sbag0
 (g8
@@ -59,7 +59,7 @@ Ntp26
 Rp27
 (dp28
 g12
-S'create html documentation using sphinx\r'
+S'create html documentation using sphinx'
 p29
 sbag0
 (g8
@@ -68,7 +68,7 @@ Ntp30
 Rp31
 (dp32
 g12
-S'build console app to load txt file and implements logging\r'
+S'build console app to load txt file and implements logging'
 p33
 sbag0
 (g8
@@ -77,7 +77,7 @@ Ntp34
 Rp35
 (dp36
 g12
-S'create a user story to calculate powers of two numbers\r'
+S'create a user story to calculate powers of two numbers'
 p37
 sbag0
 (g8
@@ -86,7 +86,7 @@ Ntp38
 Rp39
 (dp40
 g12
-S'build a unit test for a taxi-geometry walker\r'
+S'build a unit test for a taxi-geometry walker'
 p41
 sbag0
 (g8
@@ -95,7 +95,7 @@ Ntp42
 Rp43
 (dp44
 g12
-S'create person and employee classes using inheritance\r'
+S'create person and employee classes using inheritance'
 p45
 sbag0
 (g8
@@ -104,9 +104,9 @@ Ntp46
 Rp47
 (dp48
 g12
-S'create line and point classes using compositio'
+S'create line and point classes using composition'
 p49
 sbasS'_index'
 p50
-I0
+I10
 sb.

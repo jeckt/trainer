@@ -11,6 +11,10 @@ from trainer.exercises import Exercises, Exercise
 
 TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.txt')
 
+class ExercisesOutputTestCases(unittest.TestCase):
+    """A test suite for pickle and csv output methods"""
+    pass
+
 class ExercisesTestCases(unittest.TestCase):
     def setUp(self):
         self.exercises = Exercises()
