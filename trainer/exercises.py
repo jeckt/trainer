@@ -12,7 +12,7 @@ and management of programming exercises
 # list, set of dict class? Initial thoughts no.
 # We want exercises to be SIMPLER than a list
 # object but has some similar attributes.
-class Exercises:
+class Exercises(object):
     """Container for programming exercises"""
     def __init__(self, exercises=None):
         self._index = 0
@@ -109,7 +109,7 @@ class Exercises:
         """Returns number of exercises"""
         return len(self._items)
 
-class Exercise:
+class Exercise(object):
     """Represents a single exercise"""
     def __init__(self, description):
         self._description = description

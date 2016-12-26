@@ -53,6 +53,11 @@ class TrainerTestCases1(unittest.TestCase):
         if os.path.isfile(self._TMP_DATA_FILE):
             os.remove(self._TMP_DATA_FILE)
 
+    def test_trainer_returns_exercises_of_type_exercise(self):
+        tasks = self.trainer.get_all_exercises()
+        ex = tasks[0]
+        self.assertIsInstance(ex, Exercise)
+
     def test_trainer_exercises_of_type_exercises(self):
         self.assertIsInstance(self.trainer._exercises, Exercises)
 

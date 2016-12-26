@@ -1,0 +1,112 @@
+ccopy_reg
+_reconstructor
+p0
+(ctrainer.exercises
+Exercises
+p1
+c__builtin__
+object
+p2
+Ntp3
+Rp4
+(dp5
+S'_items'
+p6
+(lp7
+g0
+(ctrainer.exercises
+Exercise
+p8
+g2
+Ntp9
+Rp10
+(dp11
+S'_description'
+p12
+S'build console app to calculate powers using argparse\r'
+p13
+sbag0
+(g8
+g2
+Ntp14
+Rp15
+(dp16
+g12
+S'write a script to load a txt file and print to console\r'
+p17
+sbag0
+(g8
+g2
+Ntp18
+Rp19
+(dp20
+g12
+S'write a script that reraises an exception\r'
+p21
+sbag0
+(g8
+g2
+Ntp22
+Rp23
+(dp24
+g12
+S'create a git repo\r'
+p25
+sbag0
+(g8
+g2
+Ntp26
+Rp27
+(dp28
+g12
+S'create html documentation using sphinx\r'
+p29
+sbag0
+(g8
+g2
+Ntp30
+Rp31
+(dp32
+g12
+S'build console app to load txt file and implements logging\r'
+p33
+sbag0
+(g8
+g2
+Ntp34
+Rp35
+(dp36
+g12
+S'create a user story to calculate powers of two numbers\r'
+p37
+sbag0
+(g8
+g2
+Ntp38
+Rp39
+(dp40
+g12
+S'build a unit test for a taxi-geometry walker\r'
+p41
+sbag0
+(g8
+g2
+Ntp42
+Rp43
+(dp44
+g12
+S'create person and employee classes using inheritance\r'
+p45
+sbag0
+(g8
+g2
+Ntp46
+Rp47
+(dp48
+g12
+S'create line and point classes using compositio'
+p49
+sbasS'_index'
+p50
+I0
+sb.

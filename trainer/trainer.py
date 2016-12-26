@@ -18,7 +18,7 @@ from exercises import Exercises, Exercise
 # TODO(steve): should exercises be moved into its own
 # class? The orchestration layer should handle errors
 # and display it to the users as oppose to raising errors
-class Trainer:
+class Trainer(object):
     """Orchestrator between users and the app. Allows users
     to add, delete, edit programming exercises or generate
     a list of random programing exercises that have been added
