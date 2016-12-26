@@ -12,18 +12,18 @@ Entry point for the trainer app
 
 import os
 import random
+import pickle
 
 from exercises import Exercises, Exercise
 
-# TODO(steve): should exercises be moved into its own
-# class? The orchestration layer should handle errors
+# TODO(steve): The orchestration layer should handle errors
 # and display it to the users as oppose to raising errors
 class Trainer(object):
     """Orchestrator between users and the app. Allows users
     to add, delete, edit programming exercises or generate
     a list of random programing exercises that have been added
     """
-    _PROD_CONNECTION = os.path.join(os.path.dirname(__file__), 'data.txt')
+    _PROD_CONNECTION = os.path.join(os.path.dirname(__file__), 'data.pkl')
 
     def __init__(self, conn=None):
         """create the trainer class
@@ -50,11 +50,7 @@ class Trainer(object):
 
         try:
             with open(self._conn, 'rb') as f:
-                self._exercises = Exercises()
-                for line in f.readlines():
-                    if line != os.linesep:
-                        ex = Exercise(line[:-len(os.linesep)])
-                        self._exercises.append(ex)
+                self._exercises = pickle.load(f)
         except:
             self._is_data_loaded = False
             raise
@@ -108,14 +104,11 @@ class Trainer(object):
     def _save_exercises(self):
         try:
             with open(self._conn, 'wb') as f:
-                for ex in self.get_all_exercises():
-                    f.write(str(ex) + os.linesep)
+                pickle.dump(self.get_all_exercises(), f)
         except:
             raise
 
 if __name__ == '__main__':
-    # TODO(steve): implement an argument parser to
-    # handle user interaction
     import argparse
 
     desc = """
@@ -145,20 +138,22 @@ if __name__ == '__main__':
     t = Trainer()
     if args.newlist:
         try:
-            for i, exercise in enumerate(t.get_new_list(args.newlist)):
-                print "{}: {}".format(i, exercise)
+            for i, ex in enumerate(t.get_new_list(args.newlist)):
+                print "{}: {}".format(i, ex)
         except Exception as e:
             print e
     elif args.add:
         try:
-            t.add_exercise(args.add)
+            ex = Exercise(args.add)
+            t.add_exercise(ex)
         except Exception as e:
             print e
     elif args.remove:
         try:
-            t.remove_exercise(args.remove)
+            ex = Exercise(args.remove)
+            t.remove_exercise(ex)
         except Exception as e:
             print e
     else:
-        for i, exercise in enumerate(t.get_all_exercises()):
-            print "{}: {}".format(i, exercise)
+        for i, ex in enumerate(t.get_all_exercises()):
+            print "{}: {}".format(i, ex)

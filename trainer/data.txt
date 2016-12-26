@@ -1,4 +1,0 @@
-build command line tool to calculate powers using argparse
-python classes with inheritance
-python classes with composition
-create functional test of trainer

@@ -25,6 +25,7 @@ class Exercises(object):
 
     def __iter__(self):
         """Return class as the iterator"""
+        self._index = 0
         return self
 
     def __eq__(self, other):

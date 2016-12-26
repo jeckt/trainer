@@ -4,16 +4,16 @@
 
 import sys
 import os
-sys.path.insert(0, os.path.abspath('..'))
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../trainer'))
+sys.path.insert(0, os.path.abspath('./trainer'))
 
 import unittest
 import shutil
 
-from trainer.trainer import Trainer
-from trainer.exercises import Exercise
+from trainer import Trainer
+from exercises import Exercise
 
-TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.txt')
+TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.pkl')
 
 class FunctionalTestCase1(unittest.TestCase):
     """A set of functional test cases that highlight
@@ -22,10 +22,10 @@ class FunctionalTestCase1(unittest.TestCase):
         # NOTE(steve): the performance impact
         # of copying a data for each test will
         # be an issue with larger test data sets
-        self._TMP_DATA_FILE = "_tmp_data.txt"
+        self._TMP_DATA_FILE = "_tmp_data.pkl"
         i = 0
         while os.path.isfile(self._TMP_DATA_FILE):
-            self._TMP_DATA_FILE = "_tmp_data_{}.txt".format(i)
+            self._TMP_DATA_FILE = "_tmp_data_{}.pkl".format(i)
             i += 1
 
         shutil.copyfile(TEST_DATA_FILE, self._TMP_DATA_FILE)
