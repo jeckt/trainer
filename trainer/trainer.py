@@ -101,6 +101,13 @@ class Trainer(object):
         self._exercises.remove(exercise)
         self._save_exercises()
 
+    # TODO(steve): method needs to be updated when 
+    # multiple lists support is enabled
+    def update_exercise(self, old_exercise, new_exercise):
+        """Update existing exercise in Trainer"""
+        self._exercises.update(old_exercise, new_exercise)
+        self._save_exercises()
+
     def _save_exercises(self):
         try:
             with open(self._conn, 'wb') as f:

@@ -69,7 +69,7 @@ class TrainerTestCases1(unittest.TestCase):
         error_msg = "No such file or directory: '{}'".format('fake.csv')
         self.assertTrue(error_msg in context.exception)
 
-    def test_trainer_update_valid_exercise(self):
+    def test_trainer_update_exercise(self):
         all_tasks = self.trainer.get_all_exercises()
         ex = all_tasks[2]
 
@@ -78,7 +78,7 @@ class TrainerTestCases1(unittest.TestCase):
 
         new_all_tasks = self.trainer.get_all_exercises()
         self.assertTrue(new_ex in new_all_tasks)
-        self.assertFalse(ex in new_all_tasks)
+        self.assertTrue(ex not in new_all_tasks)
 
     def test_trainer_update_non_existent_exercise(self):
         old_ex = Exercise("not in set")
@@ -90,28 +90,21 @@ class TrainerTestCases1(unittest.TestCase):
         error_msg = "{} not in exercises".format(old_ex)
         self.assertTrue(error_msg in context.exception)
 
-    def test_trainer_update_old_exercise_invalid_type(self):
-        old_ex = "strings won't work anymore"
-        new_ex = Exercise("it won't work dude")
-
-        with self.assertRaises(TypeError) as context:
-            self.trainer.update_exercise(old_ex, new_ex)
-
-        msg = "Old exercise must be of type Exercise,"
-        msg += " not {}".format(type(old_ex))
-        self.assertTrue(error_msg in context.exception)
-
-    def test_trainer_update_new_exercise_invalid_type(self):
+    def test_trainer_update_persists_to_data_storage(self):
         all_tasks = self.trainer.get_all_exercises()
-        old_ex = all_tasks[0]
-        new_ex = 12
+        ex = all_tasks[2]
+        new_ex = Exercise("Fake update on exercise")
 
-        with self.assertRaises(TypeError) as context:
-            self.trainer.update_exercise(old_ex, new_ex)
+        self.assertTrue(new_ex not in all_tasks)
+        self.assertTrue(ex in all_tasks)
 
-        msg = "New exercise must be of type Exercise,"
-        msg += " not {}".format(type(new_ex))
-        self.assertTrue(error_msg in context.exception)
+        self.trainer.update_exercise(ex, new_ex)
+
+        new_trainer = Trainer(conn=self._TMP_DATA_FILE)
+        new_all_tasks = new_trainer.get_all_exercises()
+
+        self.assertTrue(new_ex in new_all_tasks)
+        self.assertTrue(ex not in new_all_tasks)
 
     def test_trainer_returns_exercises_of_type_exercise(self):
         tasks = self.trainer.get_all_exercises()

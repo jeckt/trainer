@@ -59,15 +59,51 @@ class Exercises(object):
 
         return self._items[index]
 
+    def update(self, old_exercise, new_exercise):
+        """Update existing exercise
+
+        Examples
+        --------
+        >>> from trainer.trainer import Exercises, Exercise
+        >>> tasks = Exercises()
+        >>> ex = Exercise("Calcumalate powers of two numbers using argparse")
+        >>> tasks.append(ex)
+        >>> tasks[0]
+        Calcumalate powers of two numbers using argparse
+        >>> new_ex = Exercise("Calculate powers of two numbers using argparse")
+        >>> tasks.update(ex, new_ex)
+
+        Parameters
+        ----------
+        old_exercise : :obj:`Exercise`
+            an existing exercise in the set to update
+        new_exercise : :obj:`Exercise`
+            new exercise to override the existing exercise
+        """
+        msg = "{} exercise must be of type Exercise, not {}"
+        if not isinstance(old_exercise, Exercise):
+            raise TypeError(msg.format("Old", type(old_exercise)))
+
+        if not isinstance(new_exercise, Exercise):
+            raise TypeError(msg.format("New", type(new_exercise)))
+
+        if old_exercise not in self._items:
+            error_msg = "{} not in exercises".format(old_exercise)
+            raise ValueError(error_msg)
+
+        idx = self._items.index(old_exercise)
+        self._items[idx] = new_exercise
+
     def remove(self, exercise):
         """Remove exercise from set based on
         the exercise name
 
         Examples
         -------
-        >>> from trainer.trainer import Exercises
+        >>> from trainer.trainer import Exercises, Exercise
         >>> tasks = Exercises()
-        >>> tasks.append("Calculate powers of two numbers using argparse")
+        >>> ex = Exercise("Calculate powers of two numbers using argparse")
+        >>> tasks.append(ex)
 
         Parameters
         ----------

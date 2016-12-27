@@ -47,6 +47,50 @@ class ExercisesTestCases(unittest.TestCase):
     def test_exercises_starts_with_zero_length(self):
         self.assertEqual(len(self.exercises), 0)
 
+    def test_exercises_update_valid_exercise(self):
+        self.exercises.append(Exercise("Stub exercise"))
+        ex = self.exercises[0]
+
+        new_ex = Exercise("Fake update on exercise")
+        self.exercises.update(ex, new_ex)
+
+        self.assertTrue(new_ex in self.exercises)
+        self.assertTrue(ex not in self.exercises)
+
+    def test_exercises_update_non_existent_exercise(self):
+        old_ex = Exercise("not in set")
+        new_ex = Exercise("it won't work dude")
+
+        with self.assertRaises(ValueError) as context:
+            self.exercises.update(old_ex, new_ex)
+
+        error_msg = "{} not in exercises".format(old_ex)
+        self.assertTrue(error_msg in context.exception)
+
+    def test_exercises_update_old_exercise_invalid_type(self):
+        old_ex = "strings won't work anymore"
+        new_ex = Exercise("it won't work dude")
+
+        with self.assertRaises(TypeError) as context:
+            self.exercises.update(old_ex, new_ex)
+
+        msg = "Old exercise must be of type Exercise,"
+        msg += " not {}".format(type(old_ex))
+        self.assertTrue(msg in context.exception)
+
+    def test_exercises_update_new_exercise_invalid_type(self):
+        self.exercises.append(Exercise("Stub exercise"))
+        old_ex = self.exercises[0]
+        new_ex = 12
+
+        with self.assertRaises(TypeError) as context:
+            self.exercises.update(old_ex, new_ex)
+
+        msg = "New exercise must be of type Exercise,"
+        msg += " not {}".format(type(new_ex))
+        self.assertTrue(msg in context.exception)
+
+
     def test_add_valid_exercise(self):
         ex = Exercise("New exercise")
         self.exercises.append(ex)
