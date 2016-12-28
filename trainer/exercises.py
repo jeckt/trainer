@@ -194,6 +194,45 @@ class Exercises(object):
 
         self._items += tmp
 
+    def to_csv(self, filename):
+        """Output the set of exercises into a csv file with one row
+        for each exercise
+
+        Examples
+        --------
+        >>> from exercises import Exercises, Exercise
+        >>> tasks = Exercises()
+        >>> tasks.append(Exercise('Exercise 1'))
+        >>> tasks.append(Exercise('Exercise 2'))
+        >>> len(tasks)
+        2
+        >>> tasks.to_csv('test.csv')
+        >>> import csv
+        >>> with open('test.csv', 'rb') as f:
+        >>>     reader = csv.reader(f)
+        >>>     for ex in reader:
+        >>>         print ex
+
+        Parameters
+        ----------
+        filename: str
+            filename (including csv extension) to output the exercises
+        """
+        if len(filename) < 4 or filename[-4:] != '.csv':
+            msg = "File '{}' provided is not a csv".format(filename)
+            raise IOError(msg)
+
+        try:
+            with open(filename, 'wb') as f:
+                writer = csv.writer(f)
+                for ex in self._items:
+                    writer.writerow([ex._description])
+        except:
+            if os.path.isfile(filename):
+                os.remove(filename)
+
+            raise
+
 class Exercise(object):
     """Represents a single exercise"""
     def __init__(self, description):

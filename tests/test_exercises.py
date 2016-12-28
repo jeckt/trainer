@@ -2,6 +2,7 @@
 
 import sys
 import os
+import filecmp
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('.'))
 
@@ -19,15 +20,16 @@ class ExercisesTestCases(unittest.TestCase):
 
     def tearDown(self):
         if os.path.isfile(TEST_ADD_DATA_COPY):
-            os.remove(TEST_ADD_DATA)
+            os.remove(TEST_ADD_DATA_COPY)
 
     def test_output_exercises_to_csv(self):
-        self.exercises.output_exercises_to_csv(TEST_ADD_DATA_COPY)
+        self.exercises.add_exercises_from_csv(TEST_ADD_DATA)
+        self.exercises.to_csv(TEST_ADD_DATA_COPY)
         self.assertTrue(filecmp.cmp(TEST_ADD_DATA, TEST_ADD_DATA_COPY))
 
     def test_output_exercises_to_csv_incorrect_ext(self):
         with self.assertRaises(IOError) as context:
-            self.exercises.output_exercises_to_csv('test.py')
+            self.exercises.to_csv('test.py')
 
         msg = "File '{}' provided is not a csv".format('test.py')
         self.assertTrue(msg in context.exception)

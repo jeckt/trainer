@@ -112,6 +112,10 @@ class Trainer(object):
         """Add one or more exercises from csv file"""
         self._exercises.add_exercises_from_csv(filename)
 
+    def output_exercises_to_csv(self, filename):
+        """Output set of exercises to csv"""
+        self._exercises.to_csv(filename)
+
     def _save_exercises(self):
         try:
             with open(self._conn, 'wb') as f:

@@ -2,6 +2,7 @@
 
 import sys
 import os
+import filecmp
 sys.path.insert(0, os.path.abspath('../trainer'))
 sys.path.insert(0, os.path.abspath('./trainer'))
 
