@@ -14,6 +14,8 @@ from exercises import Exercises, Exercise
 DATA_PATH = os.path.dirname(__file__)
 TEST_DATA_FILE = os.path.join(DATA_PATH, 'test_dataset_1.pkl')
 TEST_ADD_DATA = os.path.join(DATA_PATH, 'new_exercises.csv')
+TEST_OUT_FILE = os.path.join(DATA_PATH, 'test_dataset_1.csv')
+TEST_OUT_FILE_COPY = os.path.join(DATA_PATH, 'test_dataset_1_copy.csv')
 
 class TrainerConnectionTestCases(unittest.TestCase):
     """A set of unit test for testing connection"""
@@ -54,6 +56,13 @@ class TrainerTestCases1(unittest.TestCase):
     def tearDown(self):
         if os.path.isfile(self._TMP_DATA_FILE):
             os.remove(self._TMP_DATA_FILE)
+
+        if os.path.isfile(TEST_OUT_FILE_COPY):
+            os.remove(TEST_OUT_FILE_COPY)
+
+    def test_trainer_output_exercises_to_csv(self):
+        self.trainer.output_exercises_to_csv(TEST_OUT_FILE_COPY)
+        self.assertTrue(filecmp.cmp(TEST_OUT_FILE, TEST_OUT_FILE_COPY))
 
     def test_trainer_bulk_add_exercises_from_csv(self):
         tasks = self.trainer.get_all_exercises()

@@ -11,14 +11,26 @@ from trainer.exercises import Exercises, Exercise
 
 DATA_PATH = os.path.dirname(__file__)
 TEST_ADD_DATA = os.path.join(DATA_PATH, 'new_exercises.csv')
-
-class ExercisesOutputTestCases(unittest.TestCase):
-    """A test suite for pickle and csv output methods"""
-    pass
+TEST_ADD_DATA_COPY = os.path.join(DATA_PATH, 'new_exercises_copy.csv')
 
 class ExercisesTestCases(unittest.TestCase):
     def setUp(self):
         self.exercises = Exercises()
+
+    def tearDown(self):
+        if os.path.isfile(TEST_ADD_DATA_COPY):
+            os.remove(TEST_ADD_DATA)
+
+    def test_output_exercises_to_csv(self):
+        self.exercises.output_exercises_to_csv(TEST_ADD_DATA_COPY)
+        self.assertTrue(filecmp.cmp(TEST_ADD_DATA, TEST_ADD_DATA_COPY))
+
+    def test_output_exercises_to_csv_incorrect_ext(self):
+        with self.assertRaises(IOError) as context:
+            self.exercises.output_exercises_to_csv('test.py')
+
+        msg = "File '{}' provided is not a csv".format('test.py')
+        self.assertTrue(msg in context.exception)
 
     def test_bulk_add_exercises_from_csv(self):
         self.exercises.add_exercises_from_csv(TEST_ADD_DATA)
