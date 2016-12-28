@@ -9,7 +9,9 @@ import unittest
 
 from trainer.exercises import Exercises, Exercise
 
-TEST_DATA_FILE = os.path.join(os.path.dirname(__file__), 'test_dataset_1.txt')
+DATA_PATH = os.path.dirname(__file__)
+TEST_DATA_FILE = os.path.join(DATA_PATH, 'test_dataset_1.pkl')
+TEST_ADD_DATA = os.path.join(DATA_PATH, 'new_exercises.csv')
 
 class ExercisesOutputTestCases(unittest.TestCase):
     """A test suite for pickle and csv output methods"""
@@ -18,6 +20,19 @@ class ExercisesOutputTestCases(unittest.TestCase):
 class ExercisesTestCases(unittest.TestCase):
     def setUp(self):
         self.exercises = Exercises()
+
+    def test_trainer_bulk_add_exercises_from_csv(self):
+        self.assertEqual(len(self.exercises), 10)
+
+        self.exercises.add_exercises_from_csv(TEST_DATA_FILE)
+        self.assertEqual(len(self.exercises), 13)
+
+    def test_trainer_bulk_add_exercises_from_csv_no_file(self):
+        with self.assertRaises(IOError) as context:
+            self.exercises.add_exercises_from_csv('fake.csv')
+
+        error_msg = "no such file or directory: '{}'".format('fake.csv')
+        self.asserttrue(error_msg in context.exception)
 
     def test_exercises_valid_comparison(self):
         ex = Exercise("new exercise")
