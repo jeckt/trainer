@@ -59,14 +59,15 @@ class TrainerTestCases1(unittest.TestCase):
         tasks = self.trainer.get_all_exercises()
         self.assertEqual(len(tasks), 10)
 
-        self.trainer.add_exercises_from_csv(TEST_DATA_FILE)
-        self.assertEqual(len(tasks), 13)
+        self.trainer.add_exercises_from_csv(TEST_ADD_DATA)
+        new_tasks = self.trainer.get_all_exercises()
+        self.assertEqual(len(new_tasks), 13)
 
     def test_trainer_bulk_add_exercises_from_csv_no_file(self):
         with self.assertRaises(IOError) as context:
             self.trainer.add_exercises_from_csv('fake.csv')
 
-        error_msg = "No such file or directory: '{}'".format('fake.csv')
+        error_msg = "no such file or directory: '{}'".format('fake.csv')
         self.assertTrue(error_msg in context.exception)
 
     def test_trainer_update_exercise(self):

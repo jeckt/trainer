@@ -108,6 +108,10 @@ class Trainer(object):
         self._exercises.update(old_exercise, new_exercise)
         self._save_exercises()
 
+    def add_exercises_from_csv(self, filename):
+        """Add one or more exercises from csv file"""
+        self._exercises.add_exercises_from_csv(filename)
+
     def _save_exercises(self):
         try:
             with open(self._conn, 'wb') as f:

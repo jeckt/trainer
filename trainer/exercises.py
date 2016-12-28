@@ -8,6 +8,9 @@ This module handles the representation
 and management of programming exercises
 """
 
+import os
+import csv
+
 # TODO(steve): should this class inherit from
 # list, set of dict class? Initial thoughts no.
 # We want exercises to be SIMPLER than a list
@@ -15,6 +18,11 @@ and management of programming exercises
 # TODO(steve): should we switch from python
 # pickle to json pickle for cross platform
 # compatibility
+# TODO(steve): Should a load method be implemented?
+# This will make Exercises handle it's own data
+# storage implementation. Or is this trainer's role?
+# Current design decision is to have trainer
+# handle the data storage implementation
 class Exercises(object):
     """Container for programming exercises"""
     def __init__(self, exercises=None):
@@ -31,13 +39,6 @@ class Exercises(object):
         self._index = 0
         return self
 
-    def __eq__(self, other):
-        """Comparison operator"""
-        if type(self) == type(other):
-            return self._items == other._items
-        else:
-            return False
-
     def next(self):
         """Iterator interface method"""
         if self._index < len(self._items):
@@ -46,6 +47,13 @@ class Exercises(object):
             return item
         else:
             raise StopIteration()
+
+    def __eq__(self, other):
+        """Comparison operator"""
+        if type(self) == type(other):
+            return self._items == other._items
+        else:
+            return False
 
     def __getitem__(self, index):
         """Index operator"""
@@ -149,6 +157,43 @@ class Exercises(object):
         """Returns number of exercises"""
         return len(self._items)
 
+    def add_exercises_from_csv(self, filename):
+        """Add one or more exercuses using a csv file
+
+        Examples
+        --------
+        >>> from trainer import Exercises
+        >>> exercises = Exercises()
+        >>> exercises.add_exercises_from_csv('my_exercises.csv')
+        >>> exercises[0]
+        'Command line tool to calculate powers of two numbers using argparse'
+
+        Parameters
+        ----------
+        filename: str
+            filename of the programming exercises to add. file should be
+            a csv of the form
+
+            programming exercise 1
+            programming exercise 2
+            programming exercise 3
+        """
+        if not os.path.isfile(filename):
+            error_msg = "no such file or directory: '{}'".format('fake.csv')
+            raise IOError(error_msg)
+
+        try:
+            tmp = []
+            with open(filename, 'rb') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    ex = Exercise(row[0])
+                    tmp.append(ex)
+        except:
+            raise
+
+        self._items += tmp
+
 class Exercise(object):
     """Represents a single exercise"""
     def __init__(self, description):
@@ -165,7 +210,6 @@ class Exercise(object):
             return self._description == other._description
         else:
             return False
-
 
 if __name__ == '__main__':
     pass
