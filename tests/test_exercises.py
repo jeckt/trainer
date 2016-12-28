@@ -239,6 +239,17 @@ class ExerciseTestCases(unittest.TestCase):
 
         self.assertNotEqual(ex1, ex2)
 
+    def test_exercise_to_list_returns_list(self):
+        desc = 'Build a tree!'
+        ex = Exercise(desc)
+        row = ex.to_list()
+        self.assertIsInstance(row, list)
+
+    def test_exercise_to_list_has_description(self):
+        desc = 'Build a tree!'
+        ex = Exercise(desc)
+        row = ex.to_list()
+        self.assertIn(desc, row)
 
 if __name__ == '__main__':
     unittest.main()

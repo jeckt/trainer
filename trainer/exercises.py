@@ -226,7 +226,7 @@ class Exercises(object):
             with open(filename, 'wb') as f:
                 writer = csv.writer(f)
                 for ex in self._items:
-                    writer.writerow([ex._description])
+                    writer.writerow(ex.to_list())
         except:
             if os.path.isfile(filename):
                 os.remove(filename)
@@ -249,6 +249,20 @@ class Exercise(object):
             return self._description == other._description
         else:
             return False
+
+    def to_list(self):
+        """Creates a list object of the properties
+        of the exercise
+
+        Examples
+        --------
+        >>> from exercises import Exercise
+        >>> ex = Exercise("Build a tree!")
+        >>> row = ex.to_list()
+        >>> row
+        >>> ['Build a tree!']
+        """
+        return [self._description]
 
 if __name__ == '__main__':
     pass

@@ -34,7 +34,10 @@ TODO
    #. (DONE) Refactor the exercises out of the trainer class
    #. (DONE) Investigate using Python pickling to store exercises instead of txt
    #. (DONE) Provide support for loading exercises via csv. For ease of updating
-   #. Provide output to text for visual inspection?
+   #. (DONE) Provide output to text for visual inspection?
+   #. A more efficent way to run all test suites before check in?
+   #. Helper methods to easily update persistent data storage for changes in
+         Exercise and Exercises classes
    #. Add ids to exercises to enable easier adding/removing
 
 #. Enable support for generating lists with time to complete estimates
