@@ -38,7 +38,7 @@ TODO
    #. A more efficent way to run all test suites before check in?
    #. Helper methods to easily update persistent data storage for changes in
          Exercise and Exercises classes
-   #. Add ids to exercises to enable easier adding/removing
+   #. Add ids to exercises to enable easier adding/removing (auto generated id)
 
 #. Enable support for generating lists with time to complete estimates
 
