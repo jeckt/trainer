@@ -7,7 +7,7 @@ trainer.trainer
 Entry point for the trainer app
 
 :copyright: (c) 2016 by Steven Nguyen.
-:license: GNU GPLv3, see LICENSE for more details
+:license: Apache 2.0, see LICENSE for more details
 """
 
 import os
